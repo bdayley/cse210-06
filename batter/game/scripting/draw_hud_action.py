@@ -12,7 +12,7 @@ class DrawHudAction(Action):
         self._draw_label(cast, LEVEL_GROUP, LEVEL_FORMAT, stats.get_level())
         self._draw_label(cast, LIVES_GROUP, LIVES_FORMAT, stats.get_lives())
         self._draw_label(cast, SCORE_GROUP, SCORE_FORMAT, stats.get_score())
-
+# the error was built here (excercise)
     def _draw_label(self, cast, group, format_str, data):
         label = cast.get_first_actor(group)
         text = label.get_text()
