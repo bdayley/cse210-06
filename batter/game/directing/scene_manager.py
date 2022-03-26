@@ -1,4 +1,5 @@
 import csv
+from lib2to3.pgen2.token import RARROW
 from constants import *
 from game.casting.animation import Animation
 from game.casting.ball import Ball
@@ -25,7 +26,6 @@ from game.scripting.end_drawing_action import EndDrawingAction
 from game.scripting.initialize_devices_action import InitializeDevicesAction
 from game.scripting.load_assets_action import LoadAssetsAction
 from game.scripting.move_ball_action import MoveBallAction
-from game.scripting.move_brick_action import MoveBrickAction
 from game.scripting.move_racket_action import MoveRacketAction
 from game.scripting.play_sound_action import PlaySoundAction
 from game.scripting.release_devices_action import ReleaseDevicesAction
@@ -36,7 +36,7 @@ from game.services.raylib.raylib_audio_service import RaylibAudioService
 from game.services.raylib.raylib_keyboard_service import RaylibKeyboardService
 from game.services.raylib.raylib_physics_service import RaylibPhysicsService
 from game.services.raylib.raylib_video_service import RaylibVideoService
-
+import random
 
 class SceneManager:
     """The person in charge of setting up the cast and script for each scene."""
@@ -60,7 +60,6 @@ class SceneManager:
     INITIALIZE_DEVICES_ACTION = InitializeDevicesAction(AUDIO_SERVICE, VIDEO_SERVICE)
     LOAD_ASSETS_ACTION = LoadAssetsAction(AUDIO_SERVICE, VIDEO_SERVICE)
     MOVE_BALL_ACTION = MoveBallAction()
-    MOVE_BRICK_ACTION = MoveBrickAction()
     MOVE_RACKET_ACTION = MoveRacketAction()
     RELEASE_DEVICES_ACTION = ReleaseDevicesAction(AUDIO_SERVICE, VIDEO_SERVICE)
     START_DRAWING_ACTION = StartDrawingAction(VIDEO_SERVICE)
@@ -84,14 +83,14 @@ class SceneManager:
     # ----------------------------------------------------------------------------------------------
     # scene methods
     # ----------------------------------------------------------------------------------------------
-    
+# replace _add_bricks with _add_random_bricks    
     def _prepare_new_game(self, cast, script):
         self._add_stats(cast)
         self._add_level(cast)
         self._add_lives(cast)
         self._add_score(cast)
         self._add_ball(cast)
-        self._add_bricks(cast)
+        self._add_random_bricks(cast)
         self._add_racket(cast)
         self._add_dialog(cast, ENTER_TO_START)
 
@@ -102,10 +101,10 @@ class SceneManager:
         self._add_output_script(script)
         self._add_unload_script(script)
         self._add_release_script(script)
-        
+# Replace _add_bricks with _add_random_bricks        
     def _prepare_next_level(self, cast, script):
         self._add_ball(cast)
-        self._add_bricks(cast)
+        self._add_random_bricks(cast)
         self._add_racket(cast)
         self._add_dialog(cast, PREP_TO_LAUNCH)
 
@@ -195,6 +194,33 @@ class SceneManager:
 
                     brick = Brick(body, animation, points)
                     cast.add_actor(BRICK_GROUP, brick)
+# Adding _random_brick
+    def _add_random_bricks(self, cast):
+        cast.clear_actors(BRICK_GROUP)
+        
+        stats = cast.get_first_actor(STATS_GROUP)
+        level = stats.get_level() % BASE_LEVELS 
+        for r in range(4):
+            for c in range(4):
+                c1 = random.randint(c,13)
+                x = FIELD_LEFT + c1 * BRICK_WIDTH
+                y = FIELD_TOP + r * BRICK_HEIGHT
+                color = 'b'
+                frames = 1
+                points = BRICK_POINTS                     
+                if frames == 1:
+                    points *= 2
+                
+                position = Point(x, y)
+                size = Point(BRICK_WIDTH, BRICK_HEIGHT)
+                velocity = Point(0, 0)
+                images = BRICK_IMAGES[color][0:frames]
+
+                body = Body(position, size, velocity)
+                animation = Animation(images, BRICK_RATE, BRICK_DELAY)
+
+                brick = Brick(body, animation, points)
+                cast.add_actor(BRICK_GROUP, brick)
 
     def _add_dialog(self, cast, message):
         cast.clear_actors(DIALOG_GROUP)
@@ -273,7 +299,6 @@ class SceneManager:
     def _add_update_script(self, script):
         script.clear_actions(UPDATE)
         script.add_action(UPDATE, self.MOVE_BALL_ACTION)
-        script.add_action(UPDATE, self.MOVE_BRICK_ACTION)
         script.add_action(UPDATE, self.MOVE_RACKET_ACTION)
         script.add_action(UPDATE, self.COLLIDE_BORDERS_ACTION)
         script.add_action(UPDATE, self.COLLIDE_BRICKS_ACTION)
