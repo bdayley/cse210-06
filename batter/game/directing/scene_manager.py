@@ -200,13 +200,19 @@ class SceneManager:
         
         stats = cast.get_first_actor(STATS_GROUP)
         level = stats.get_level() % BASE_LEVELS 
-        for r in range(4):
-            for c in range(4):
-                c1 = random.randint(c,13)
-                x = FIELD_LEFT + c1 * BRICK_WIDTH
-                y = FIELD_TOP + r * BRICK_HEIGHT
-                color = 'b'
-                frames = 1
+        filename = LEVEL_FILE.format(level)
+        with open(filename, 'r') as file:
+            reader = csv.reader(file, skipinitialspace=True)
+            for r, row in enumerate(reader):
+                for c, column in enumerate(row):  
+                    color = column[0]
+                    frames = int(column[1])
+                    break
+        for r1 in range(BRICK_ROWS):
+            for c1 in range(BRICK_COLUMNS):
+                c2 = random.randint(c,13)
+                x = FIELD_LEFT + c2 * BRICK_WIDTH
+                y = FIELD_TOP + r1 * BRICK_HEIGHT
                 points = BRICK_POINTS                     
                 if frames == 1:
                     points *= 2
