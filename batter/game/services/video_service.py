@@ -1,5 +1,5 @@
 class VideoService:
-    """A video service inteface."""
+    """A video service interface."""
 
     def clear_buffer(self):
         """Prepares the buffer for drawing."""
