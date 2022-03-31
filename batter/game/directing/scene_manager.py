@@ -17,6 +17,7 @@ from game.scripting.collide_borders_action import CollideBordersAction
 from game.scripting.collide_brick_action import CollideBrickAction
 from game.scripting.collide_racket_action import CollideRacketAction
 from game.scripting.control_racket_action import ControlRacketAction
+from game.scripting.control_ball_action import ControlBallAction
 from game.scripting.draw_ball_action import DrawBallAction
 from game.scripting.draw_bricks_action import DrawBricksAction
 from game.scripting.draw_dialog_action import DrawDialogAction
@@ -51,6 +52,7 @@ class SceneManager:
     COLLIDE_BRICKS_ACTION = CollideBrickAction(PHYSICS_SERVICE, AUDIO_SERVICE)
     COLLIDE_RACKET_ACTION = CollideRacketAction(PHYSICS_SERVICE, AUDIO_SERVICE)
     CONTROL_RACKET_ACTION = ControlRacketAction(KEYBOARD_SERVICE)
+    CONTROL_BALL_ACTION = ControlBallAction(KEYBOARD_SERVICE)
     DRAW_BALL_ACTION = DrawBallAction(VIDEO_SERVICE)
     DRAW_BRICKS_ACTION = DrawBricksAction(VIDEO_SERVICE)
     DRAW_DIALOG_ACTION = DrawDialogAction(VIDEO_SERVICE)
@@ -129,6 +131,7 @@ class SceneManager:
 
         script.clear_actions(INPUT)
         script.add_action(INPUT, self.CONTROL_RACKET_ACTION)
+        script.add_action(INPUT, self.CONTROL_BALL_ACTION)
         self._add_update_script(script)
         self._add_output_script(script)
 
@@ -148,7 +151,7 @@ class SceneManager:
     
     def _activate_ball(self, cast):
         ball = cast.get_first_actor(BALL_GROUP)
-        ball.release()
+        #ball.release() #ball released by space bar now
 
     def _add_ball(self, cast):
         cast.clear_actors(BALL_GROUP)
