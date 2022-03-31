@@ -115,7 +115,7 @@ class SceneManager:
 
 # Replace _add_bricks with _add_random_bricks        
    def _prepare_next_level(self, cast, script):
-      self._add_ball(cast)
+      # self._add_ball(cast) #BD
       # self._add_bricks(cast)
       self._add_random_bricks(cast)
       self._add_racket(cast)
@@ -127,7 +127,7 @@ class SceneManager:
       script.add_action(OUTPUT, PlaySoundAction(self.AUDIO_SERVICE, WELCOME_SOUND))
       
    def _prepare_try_again(self, cast, script):
-      self._add_ball(cast)
+      #self._add_ball(cast) #BD
       self._add_racket(cast)
       self._add_dialog(cast, PREP_TO_LAUNCH)
 
@@ -147,7 +147,7 @@ class SceneManager:
       self._add_output_script(script)
 
    def _prepare_game_over(self, cast, script):
-      self._add_ball(cast)
+      #self._add_ball(cast) #BD
       self._add_racket(cast)
       self._add_dialog(cast, WAS_GOOD_GAME)
 
