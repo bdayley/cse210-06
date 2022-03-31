@@ -27,8 +27,9 @@ class CollideBordersAction(Action):
             self._audio_service.play_sound(bounce_sound)
 
         if y < FIELD_TOP:
-            ball.bounce_y()
-            self._audio_service.play_sound(bounce_sound)
+            cast.remove_actor(BALL_GROUP, ball) #remove ball when it leave the top of the screen #BD
+            #ball.bounce_y()
+            #self._audio_service.play_sound(bounce_sound)
 
         elif y >= (FIELD_BOTTOM - BALL_WIDTH):
             stats = cast.get_first_actor(STATS_GROUP)
