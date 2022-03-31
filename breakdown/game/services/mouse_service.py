@@ -1,5 +1,5 @@
 class MouseService:
-    """A mouse service inteface."""
+    """A mouse service interface."""
 
     def get_coordinates(self):
         """Gets the current mouse coordinates as a Point.

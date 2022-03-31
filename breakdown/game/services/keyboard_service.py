@@ -1,5 +1,5 @@
 class KeyboardService:
-    """A keyboard service inteface."""
+    """A keyboard service interface."""
 
     def is_key_down(self, key):
         """Detects if the given key is being pressed.

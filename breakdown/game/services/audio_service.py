@@ -1,5 +1,5 @@
 class AudioService:
-    """An audio service inteface.
+    """An audio service interface.
 
     The responsibility of AudioService is to handle the audio assets for a game.
     """

@@ -1,5 +1,5 @@
 class PhysicsService:
-    """A physics service inteface."""
+    """A physics service interface."""
 
     def has_collided(self, subject, agent):
         """Whether or not the given subject has collided with the given agent.
