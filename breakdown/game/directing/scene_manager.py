@@ -17,6 +17,8 @@ from game.scripting.collide_borders_action import CollideBordersAction
 from game.scripting.collide_brick_action import CollideBrickAction
 from game.scripting.collide_racket_action import CollideRacketAction
 from game.scripting.control_racket_action import ControlRacketAction
+from game.scripting.collide_racket_brick_action import CollideRacketBrickAction #RC
+from game.scripting.reach_bottom_action import ReachBottomAction #RC
 from game.scripting.control_ball_action import ControlBallAction #BD
 from game.scripting.draw_ball_action import DrawBallAction
 from game.scripting.draw_new_ball_action import DrawNewBallAction #BD
@@ -28,6 +30,7 @@ from game.scripting.end_drawing_action import EndDrawingAction
 from game.scripting.initialize_devices_action import InitializeDevicesAction
 from game.scripting.load_assets_action import LoadAssetsAction
 from game.scripting.move_ball_action import MoveBallAction
+from game.scripting.move_brick_action import MoveBrickAction #RC
 from game.scripting.move_racket_action import MoveRacketAction
 from game.scripting.play_sound_action import PlaySoundAction
 from game.scripting.release_devices_action import ReleaseDevicesAction
@@ -52,6 +55,8 @@ class SceneManager:
     COLLIDE_BORDERS_ACTION = CollideBordersAction(PHYSICS_SERVICE, AUDIO_SERVICE)
     COLLIDE_BRICKS_ACTION = CollideBrickAction(PHYSICS_SERVICE, AUDIO_SERVICE)
     COLLIDE_RACKET_ACTION = CollideRacketAction(PHYSICS_SERVICE, AUDIO_SERVICE)
+    COLLIDE_RACKET_BRICK_ACTION = CollideRacketBrickAction(PHYSICS_SERVICE, AUDIO_SERVICE) #RC
+    REACH_BOTTOM_ACTION = ReachBottomAction(PHYSICS_SERVICE, AUDIO_SERVICE) #RC
     CONTROL_RACKET_ACTION = ControlRacketAction(KEYBOARD_SERVICE)
     CONTROL_BALL_ACTION = ControlBallAction(KEYBOARD_SERVICE) #BD
     DRAW_BALL_ACTION = DrawBallAction(VIDEO_SERVICE)
@@ -64,6 +69,7 @@ class SceneManager:
     INITIALIZE_DEVICES_ACTION = InitializeDevicesAction(AUDIO_SERVICE, VIDEO_SERVICE)
     LOAD_ASSETS_ACTION = LoadAssetsAction(AUDIO_SERVICE, VIDEO_SERVICE)
     MOVE_BALL_ACTION = MoveBallAction()
+    MOVE_BRICK_ACTION = MoveBrickAction() #RC
     MOVE_RACKET_ACTION = MoveRacketAction()
     RELEASE_DEVICES_ACTION = ReleaseDevicesAction(AUDIO_SERVICE, VIDEO_SERVICE)
     START_DRAWING_ACTION = StartDrawingAction(VIDEO_SERVICE)
@@ -316,5 +322,8 @@ class SceneManager:
         script.add_action(UPDATE, self.COLLIDE_BORDERS_ACTION)
         script.add_action(UPDATE, self.COLLIDE_BRICKS_ACTION)
         #script.add_action(UPDATE, self.COLLIDE_RACKET_ACTION) #BD
+        script.add_action(UPDATE, self.REACH_BOTTOM_ACTION) #RC
+        script.add_action(UPDATE, self.COLLIDE_RACKET_BRICK_ACTION) #RC
         script.add_action(UPDATE, self.MOVE_RACKET_ACTION)
+        script.add_action(UPDATE, self.MOVE_BRICK_ACTION) #RC
         script.add_action(UPDATE, self.CHECK_OVER_ACTION)
