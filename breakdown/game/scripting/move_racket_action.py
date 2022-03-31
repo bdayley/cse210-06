@@ -10,6 +10,9 @@ class MoveRacketAction(Action):
 
     def execute(self, cast, script, callback):
         racket = cast.get_first_actor(RACKET_GROUP)
+        ball = cast.get_first_actor(BALL_GROUP) #RC
+        ball_body = ball.get_body() #RC
+
         body = racket.get_body()
         velocity = body.get_velocity()
         position = body.get_position()
@@ -23,4 +26,8 @@ class MoveRacketAction(Action):
             position = Point(SCREEN_WIDTH - RACKET_WIDTH, position.get_y())
             
         body.set_position(position)
+
+        ball_position = ball_body.get_position() #RC
+        ball_position = Point(position.get_x(), ball_position.get_y()) #RC        
+        ball_body.set_position(ball_position) #RC
         

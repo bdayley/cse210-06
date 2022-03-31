@@ -209,7 +209,7 @@ class SceneManager:
                   brick = Brick(body, animation, points)
                   cast.add_actor(BRICK_GROUP, brick)
 
-   def _add_random_bricks(self, cast):
+   def _add_random_bricks(self, cast): #RC start
       cast.clear_actors(BRICK_GROUP)
       
       stats = cast.get_first_actor(STATS_GROUP)
@@ -241,7 +241,7 @@ class SceneManager:
                      animation = Animation(images, BRICK_RATE, BRICK_DELAY)
 
                      brick = Brick(body, animation, points)
-                     cast.add_actor(BRICK_GROUP, brick)
+                     cast.add_actor(BRICK_GROUP, brick) #RC End
       
 # Adding _random_brick
 #  def _add_random_bricks(self, cast):
@@ -362,6 +362,6 @@ class SceneManager:
       #script.add_action(UPDATE, self.COLLIDE_RACKET_ACTION) #BD
       script.add_action(UPDATE, self.REACH_BOTTOM_ACTION) #RC
       script.add_action(UPDATE, self.COLLIDE_RACKET_BRICK_ACTION) #RC
-      script.add_action(UPDATE, self.MOVE_RACKET_ACTION)
+      # script.add_action(UPDATE, self.MOVE_RACKET_ACTION) #RC
       script.add_action(UPDATE, self.MOVE_BRICK_ACTION) #RC
       script.add_action(UPDATE, self.CHECK_OVER_ACTION)
