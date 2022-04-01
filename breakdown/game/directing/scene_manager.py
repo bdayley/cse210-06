@@ -243,39 +243,7 @@ class SceneManager:
                      brick = Brick(body, animation, points)
                      cast.add_actor(BRICK_GROUP, brick) #RC End
       
-# Adding _random_brick
-#  def _add_random_bricks(self, cast):
-#      cast.clear_actors(BRICK_GROUP)
-      
-#      stats = cast.get_first_actor(STATS_GROUP)
-#      level = stats.get_level() % BASE_LEVELS 
-#      filename = LEVEL_FILE.format(level)
-#      with open(filename, 'r') as file:
-#          reader = csv.reader(file, skipinitialspace=True)
-#          for r, row in enumerate(reader):
-#              for c, column in enumerate(row):  
-#                  color = column[0]
-#                  frames = int(column[1])
-#                  break
-#      for r1 in range(BRICK_ROWS):
-#          for c1 in range(BRICK_COLUMNS):
-#              c2 = random.randint(c,13)
-#              x = FIELD_LEFT + c2 * BRICK_WIDTH
-#              y = FIELD_TOP + r1 * BRICK_HEIGHT
-#              points = BRICK_POINTS                     
-#              if frames == 1:
-#                  points *= 2
-               
-#              position = Point(x, y)
-#              size = Point(BRICK_WIDTH, BRICK_HEIGHT)
-#              velocity = Point(0, 0)
-#              images = BRICK_IMAGES[color][0:frames]
-
-#              body = Body(position, size, velocity)
-#              animation = Animation(images, BRICK_RATE, BRICK_DELAY)
-
-#              brick = Brick(body, animation, points)
-#              cast.add_actor(BRICK_GROUP, brick)
+#
 
    def _add_dialog(self, cast, message):
       cast.clear_actors(DIALOG_GROUP)
