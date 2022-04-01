@@ -46,14 +46,13 @@ root                    (project root folder)
 
 ---
 
-Player can move left and right, and shoot the ball.
-
+- Player can move left and right, and shoot the ball.
 - Player moves left and right using the arrow keys.
 - Player shoots the ball using the space bar.
 - Player gains 100 points when an object is hit.
-- Player loses 50 points when an object reaches the bottom.
+- Player loses 200 points when an object reaches the bottom.
 - Player starts with 3 lives.
-- If a player reaches 0 points, a life a lost.
+- Player loses a life if an object collides with the player.
 - Game is over when player has no more lives.
 
 ## Required Technologies
